@@ -63,3 +63,10 @@ class TaskFinishedAPIView(APIView):
         task.save()
         serializer = TaskSerializer(instance=task)
         return Response(serializer.data)
+
+    def post(self, request, id):
+        task = get_object_or_404(Task, id=id)
+        task.is_completed = True
+        task.save()
+        serializer = TaskSerializer(instance=task)
+        return Response(serializer.data)
